@@ -1,0 +1,38 @@
+Installing Doom Emacs!
+
+- Skipping ~/.config/doom/ (already exists)
+  - Skipping ~/.config/doom/init.el (already exists)...
+  - Skipping ~/.config/doom/config.el (already exists)...
+  - Skipping ~/.config/doom/packages.el (already exists)...
+- Envvar file already exists, skipping
+> Installing plugins
+  > Ensuring packages are installed and built...
+    - No packages need attention
+> Initializing profile bootstrapper...
+! 'doom profiles sync' was deprecated in 3.0.0
+! It will eventually be removed; use 'profile sync --all' instead.
+> Synchronizing default profile...
+  > (Re)building profile in ~/.config/emacs/.local/etc/@/...
+    > Generating 4 init files...
+    ✓ Built init.30.1.el
+> Deploying commit-msg and pre-push git hooks
+  ✓ Overwrote ~/.config/emacs/.git/hooks/commit-msg
+  ✓ Overwrote ~/.config/emacs/.git/hooks/pre-push
+✓ Finished! Doom is ready to go!
+
+But before you doom yourself, here are some things you should know:
+
+1. Don't forget to run 'doom sync' and restart Emacs after modifying init.el or
+   packages.el in ~/.config/doom. This is never necessary for config.el.
+
+2. If something goes wrong, run `doom doctor` to diagnose common issues with
+   your environment, setup, and config.
+
+3. Use 'doom upgrade' to update Doom. Doing it any other way will require
+   additional steps (see 'doom help upgrade').
+
+4. Access Doom's documentation from within Emacs via 'SPC h d h' or 'C-h d h'
+   (or 'M-x doom/help').
+
+Have fun!
+
