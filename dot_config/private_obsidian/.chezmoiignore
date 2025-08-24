@@ -1,4 +1,1 @@
-cache/
-logs/
-workspace.json
-workspaces.json
+private_*
