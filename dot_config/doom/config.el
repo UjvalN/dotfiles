@@ -49,8 +49,8 @@
          :target (file+head "${slug}.org"
                             "#+title: ${title}\n")
          :unarrowed t)))
-(setq org-directory "/home/ujvalnallur/notes/")
-(setq org-roam-directory "/home/ujvalnallur/notes/")
+(setq org-directory "/home/ujn/notes/")
+(setq org-roam-directory "/home/ujn/notes/")
 
 ;; latex
 (setq org-preview-latex-process-alist
@@ -74,65 +74,6 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           ))
-
-(use-package magit
-  :ensure t
-  :config
-  ;; Auto-sync function with added safety checks
-  (defun auto-sync-org-files ()
-    (interactive)
-    (let ((default-directory "/home/ujvalnallur/notes/")) ;; Replace with your org directory path
-      ;; Pull changes first with rebase
-      (if (magit-anything-modified-p)
-          (progn
-            (magit-call-git "pull" "--rebase")
-            (message "Rebase completed."))
-        (message "No changes to pull."))
-
-      ;; Stage all changes
-      (magit-call-git "add" ".")
-
-      ;; Commit if there are changes
-      (when (magit-anything-modified-p)
-        (magit-call-git "commit" "-m"
-                        (format-time-string "Auto-sync: %Y-%m-%d %H:%M:%S")))
-
-      ;; Push changes after checking status
-      (if (magit-anything-modified-p)
-          (magit-call-git "push")
-        (message "No changes to push."))
-
-      (message "Auto-sync completed")))
-
-  ;; Function to revert to the previous commit with confirmation
-  (defun revert-to-previous-commit ()
-    (interactive)
-    (let ((default-directory "/home/ujvalnallur/notes/"))
-      (when (yes-or-no-p "Are you sure you want to revert to the last commit? This will discard uncommitted changes!")
-        (magit-call-git "reset" "--hard" "HEAD~1")
-        (magit-call-git "push" "--force")
-        (message "Reverted to the previous commit"))))
-
-  ;; Function to move forward in commit history with confirmation
-  (defun move-forward-in-history ()
-    (interactive)
-    (let ((default-directory "/home/ujvalnallur/notes/"))
-      (if (yes-or-no-p "Move forward to the next commit? This will discard uncommitted changes!")
-          (progn
-            (magit-call-git "reset" "--hard" "@{1}") ;; Moves forward using reflog
-            (magit-call-git "push" "--force")
-            (message "Moved forward to the next commit"))
-        (message "Cancelled"))))
-
-  ;; Sync before Emacs exits
-  (add-hook 'kill-emacs-hook #'auto-sync-org-files)
-
-  ;; Keybindings
-  (bind-keys
-   ("C-c s" . auto-sync-org-files)  ;; Auto-sync
-   ("C-c r" . revert-to-previous-commit) ;; Revert to previous commit
-   ("C-c f" . move-forward-in-history)) ;; Move forward in commit history
-)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
