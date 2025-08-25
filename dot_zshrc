@@ -109,5 +109,6 @@ alias config="cd ~/.config"
 alias dotf="cd ~/dotfiles"
 
 eval "$(zoxide init zsh)"
+export ORG_DIR="$HOME/notes"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
