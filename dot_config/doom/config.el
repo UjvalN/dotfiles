@@ -49,8 +49,8 @@
          :target (file+head "${slug}.org"
                             "#+title: ${title}\n")
          :unarrowed t)))
-(setq org-directory "/home/ujn/notes/")
-(setq org-roam-directory "/home/ujn/notes/")
+(setq org-directory (getenv "ORG_DIR"))
+(setq org-roam-directory (getenv "ORG_DIR"))
 
 ;; latex
 (setq org-preview-latex-process-alist
