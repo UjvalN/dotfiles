@@ -194,7 +194,6 @@ bar {
 
 for_window [class="^.*"] border none
 
-
 exec --no-startup-id picom
 
 exec --no-startup-id blueman-applet
