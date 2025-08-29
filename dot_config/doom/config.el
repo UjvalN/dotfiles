@@ -75,6 +75,19 @@
           org-roam-ui-update-on-save t
           ))
 
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
+  (org-super-agenda-mode)
+  (setq org-super-agenda-groups
+        '((:name "Today"
+                 :time-grid t
+                 :scheduled today)
+          (:name "Important"
+                 :priority "A")
+          (:name "Due Soon"
+                 :deadline future))))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
