@@ -155,8 +155,7 @@
        (org
         +roam2
         +dragndrop
-        +attach
-        +pretty)              ; organize your plain life in plain text
+        +attach)              ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
