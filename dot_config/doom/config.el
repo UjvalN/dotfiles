@@ -82,11 +82,16 @@
 
     ;; Org-roam daily capture template
     (setq org-roam-dailies-capture-templates
-          '(("d" "default" entry
-             "* %?"
-             :if-new (file+head "%<%Y-%m-%d>.org"
-                                "#+title: %<%Y-%m-%d>\n\n* Morning Routine\n- [ ] Meditate\n- [ ] Exercise\n- [ ] Journal\n\n* Tasks\n\n* Notes\n")
-             :unnarrowed t)))))
+      '(("d" "default" entry
+         "* %?"
+         :if-new (file+head "%<%Y-%m-%d>.org"
+                            "#+title: %<%Y-%m-%d>\n\n* habits\n- [ ] skincare\n- [ ] workout\n- [ ] read\n\n\n")
+         :unnarrowed t)))))
+
+;; make SPC n d keybind for daily note
+(map! :leader
+      :prefix "n"
+      :desc "Today’s daily note" "d" #'org-roam-dailies-capture-today)
 
 ;; org-roam-ui
 (use-package! websocket
