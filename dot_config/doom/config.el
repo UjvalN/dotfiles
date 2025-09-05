@@ -41,16 +41,16 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-roam-graph-executable "/usr/bin/dot")
-(setq org-roam-graph-viewer "xdg-open")
 (setq org-roam-capture-templates
       '(("d" "default" plain
          "%?"
          :target (file+head "${slug}.org"
                             "#+title: ${title}\n")
          :unarrowed t)))
+
 (setq org-directory (getenv "ORG_DIR"))
-(setq org-roam-directory (getenv "ORG_DIR"))
+(setq org-roam-directory org-directory)
+(setq org-roam-dailies-directory "daily/")
 
 ;; latex
 (setq org-preview-latex-process-alist
@@ -62,6 +62,31 @@
                 :image-size-adjust (1.0 . 1.0)
                 :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
                 :image-converter ("dvipng -D %D -T tight -o %O %f"))))
+
+(after! org-roam
+  (let ((org-dir (file-truename (getenv "ORG_DIR"))))
+    ;; Set directories from environment variable
+    (setq org-directory org-dir
+          org-roam-directory org-dir
+          org-roam-dailies-directory "daily/")
+
+    ;; Org-roam database autosync
+    (org-roam-db-autosync-mode)
+
+    ;; Org-roam graph config
+    (setq org-roam-graph-executable "dot"
+          org-roam-graph-viewer "xdg-open"
+          org-roam-graph-output "/tmp/org-roam-graph.svg"
+          org-roam-graph-options
+          '(:output "svg" :file "/tmp/org-roam-graph.svg"))
+
+    ;; Org-roam daily capture template
+    (setq org-roam-dailies-capture-templates
+          '(("d" "default" entry
+             "* %?"
+             :if-new (file+head "%<%Y-%m-%d>.org"
+                                "#+title: %<%Y-%m-%d>\n\n* Morning Routine\n- [ ] Meditate\n- [ ] Exercise\n- [ ] Journal\n\n* Tasks\n\n* Notes\n")
+             :unnarrowed t)))))
 
 ;; org-roam-ui
 (use-package! websocket
