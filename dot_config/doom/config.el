@@ -85,7 +85,7 @@
       '(("d" "default" entry
          "* %?"
          :if-new (file+head "%<%Y-%m-%d>.org"
-                            "#+title: %<%Y-%m-%d>\n\n* habits\n- [ ] skincare\n- [ ] workout\n- [ ] read\n\n\n")
+                            "#+title: %<%Y-%m-%d>\n\n* habits\n- [ ] workout\n- [ ] skincare\n- [ ] read\n\n\n")
          :unnarrowed t)))))
 
 ;; make SPC n d keybind for daily note
