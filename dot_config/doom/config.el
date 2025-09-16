@@ -48,7 +48,11 @@
                             "#+title: ${title}\n")
          :unarrowed t)))
 
-(setq org-directory (getenv "ORG_DIR"))
+;; Set org-directory based on OS
+(setq org-directory
+      (if (eq system-type 'darwin)
+          "/Users/ujn/notes/"
+        (getenv "ORG_DIR")))
 (setq org-roam-directory org-directory)
 (setq org-roam-dailies-directory "daily/")
 
@@ -64,7 +68,7 @@
                 :image-converter ("dvipng -D %D -T tight -o %O %f"))))
 
 (after! org-roam
-  (let ((org-dir (file-truename (getenv "ORG_DIR"))))
+  (let ((org-dir (file-truename org-directory)))
     ;; Set directories from environment variable
     (setq org-directory org-dir
           org-roam-directory org-dir
@@ -104,19 +108,6 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           ))
-
-(use-package! org-super-agenda
-  :after org-agenda
-  :config
-  (org-super-agenda-mode)
-  (setq org-super-agenda-groups
-        '((:name "Today"
-                 :time-grid t
-                 :scheduled today)
-          (:name "Important"
-                 :priority "A")
-          (:name "Due Soon"
-                 :deadline future))))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
