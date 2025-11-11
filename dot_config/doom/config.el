@@ -51,21 +51,10 @@
 ;; Set org-directory based on OS
 (setq org-directory
       (if (eq system-type 'darwin)
-          "/Users/ujn/notes/"
+          "/Users/ujn/notes/emacs/"
         (getenv "ORG_DIR")))
 (setq org-roam-directory org-directory)
 (setq org-roam-dailies-directory "daily/")
-
-;; latex
-(setq org-preview-latex-process-alist
-      '((dvipng :programs ("latex" "dvipng")
-                :description "dvi > png"
-                :message "you need to install the programs: latex and dvipng."
-                :image-input-type "dvi"
-                :image-output-type "png"
-                :image-size-adjust (1.0 . 1.0)
-                :latex-compiler ("latex -interaction nonstopmode -output-directory %o %f")
-                :image-converter ("dvipng -D %D -T tight -o %O %f"))))
 
 (after! org-roam
   (let ((org-dir (file-truename org-directory)))
